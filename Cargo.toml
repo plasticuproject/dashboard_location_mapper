@@ -1,0 +1,36 @@
+[package]
+name = "dashboard_location_mapper"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+authors = ["plasticuproject <plasticuproject@pm.me>"]
+description = "CC/B1 Minimial dashboard location mapper."
+readme = "README.md"
+repository = "https://github.com/plasticuproject/dashboard_location_mapper"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+maxminddb = "0.24.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+csv = "1.1"
+
+[badges.maintenance]
+status = "actively-developed"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+enum_glob_use = "deny"
+pedantic = { level = "deny", priority = -1 }
+nursery = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+
+[profile.release]
+opt-level = 'z'   # Optimize for size.
+lto = true        # Enable Link Time Optimisation
+codegen-units = 1 # Reduced to increase optimisations.
+panic = 'abort'   # Abort on panic
+strip = "symbols" # Strip symbols from binary
